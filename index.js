@@ -1,45 +1,49 @@
 
 
-
 //<script src="https://cdn.tailwindcss.com"></script>
 const rules = {
-      role1:  (prova) =>  0 < prova && 8 > prova,
-      role2:  (EAP) => 0 < EAP && EAP < 1
+  rule1: (prova) => {
+    return 0 < prova && 8 > prova
+  },
+  rule2: (EAP) => {
+    return 0 < EAP && EAP < 1
+  },
 }
 
-
-const ids ={
-    provas: ['input_prova_1', 'input_prova_2'],
-    provaIntegrada: ['input_prova_integrada_1', 'input_prova_integrada_2'],
-    nome: 'input_nome',
-    email:  'input_email',
-    eap: ['input_eap_1', 'input_eap_2']
-}  
-
-
-
-function getElementValue(id){
-    document.getElementById(id).innerText
+const ids = {
+  provas: ['input_prova_1', 'input_prova_2'],
+  provaIntegrada: ['input_prova_integrada_1', 'input_prova_integrada_2'],
+  nome: 'input_nome',
+  email: 'input_email',
+  eap: ['input_eap_1', 'input_eap_2'],
 }
 
-function adicionaDadosAluno(){
+const getElementValue = (id) => document.getElementById(id).value
 
-    for(prop in ids){
-        if(prop === 'provas' || prop === 'provaIntegrada'){
-            const value = [getElementValue(ids[prop][0]), getElementValue(ids[prop][1])]
-            
-            
-            const isValid = rules.rule1()
-            if(isValid) sessionStorage.setItem(ids[prop], )  
-        
-        }
-        if(prop === 'eap'){
-
-        }
-        
+function adicionaDadosAluno() {
+  for (prop in ids) {
+    if (prop === 'nome' || prop === 'email') {
+      const value = getElementValue(ids[prop])
+      if (!value) {
+        alert('Preencha o nome e email corretamente!')
+        return
+      }
+      sessionStorage.setItem(ids[prop], item)
     }
 
- 
-
-
+    if (prop === 'provas' || prop === 'provaIntegrada') {
+      for (let i = 0; i < ids[prop].length; i++) {
+        const value = getElementValue(ids[prop][0])
+        const isValid = rules.rule1(value)
+        if (isValid) sessionStorage.setItem(ids[prop], item)
+      }
+    } else {
+      for (let i = 0; i < ids[prop].length; i++) {
+        const value = getElementValue(ids[prop][0])
+        const isValid = rules.rule1(value)
+        if (isValid) sessionStorage.setItem(ids[prop], item)
+      }
+    }
+  }
+}
 }
